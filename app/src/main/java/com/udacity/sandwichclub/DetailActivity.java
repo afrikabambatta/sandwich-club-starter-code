@@ -3,12 +3,15 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.Iterator;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -36,8 +39,8 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        //TODO(1): Go to JsonUtils and finish parseSandwichJson(String)
         Sandwich sandwich = JsonUtils.parseSandwichJson(json);
+        debugPrintSandwich(sandwich); //TODO: Remove debug code
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -57,7 +60,30 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
+    // TODO(2): Complete this method
     private void populateUI() {
+
+    }
+
+    /* Temporary debug code to print sandwich details in log */ // TODO: Remove this debug code
+    private void debugPrintSandwich(Sandwich sandwich){
+        Log.v("DetailsActivity", sandwich.getMainName());
+
+        Iterator i = sandwich.getAlsoKnownAs().iterator();
+        while(i.hasNext()){
+            Log.v("DetailsActivity", i.next().toString());
+        }
+
+        Log.v("DetailsActivity", sandwich.getPlaceOfOrigin());
+
+        Log.v("DetailsActivity", sandwich.getDescription());
+
+        Log.v("DetailsActivity", sandwich.getImage());
+
+        i = sandwich.getIngredients().iterator();
+        while(i.hasNext()){
+            Log.v("DetailsActivity", i.next().toString());
+        }
 
     }
 }
