@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -47,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
+        populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -60,9 +65,34 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    // TODO(2): Complete this method
-    private void populateUI() {
+    /* Fill the text views in activity_detail.xml with json data extracted into Sandwich object */
+    private void populateUI(Sandwich sandwich) {
+        // setText for alsoKnownAs
+        TextView nickname = findViewById(R.id.also_known_tv);
+        listSetText(sandwich.getAlsoKnownAs(), nickname);
 
+        // setText for place of origin
+        TextView origin = findViewById(R.id.origin_tv);
+        origin.setText(sandwich.getPlaceOfOrigin());
+
+        // setText for description
+        TextView description = findViewById(R.id.description_tv);
+        description.setText(sandwich.getDescription());
+
+        // setText for ingredients
+        TextView ingredients = findViewById(R.id.ingredients_tv);
+        listSetText(sandwich.getIngredients(), ingredients);
+    }
+
+    /* Helper function used to correctly format a List into a text view */
+    private void listSetText(List<String> list, TextView textView){
+        for(int i = 0; i < list.size(); i++ ){
+            if(i == list.size() - 1) {
+                textView.append(list.get(i));
+            }else{
+                textView.append(list.get(i) + ", ");
+            }
+        }
     }
 
     /* Temporary debug code to print sandwich details in log */ // TODO: Remove this debug code
