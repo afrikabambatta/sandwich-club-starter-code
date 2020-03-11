@@ -45,7 +45,6 @@ public class DetailActivity extends AppCompatActivity {
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
         Sandwich sandwich = JsonUtils.parseSandwichJson(json);
-        debugPrintSandwich(sandwich); //TODO: Remove debug code
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -93,27 +92,5 @@ public class DetailActivity extends AppCompatActivity {
                 textView.append(list.get(i) + ", ");
             }
         }
-    }
-
-    /* Temporary debug code to print sandwich details in log */ // TODO: Remove this debug code
-    private void debugPrintSandwich(Sandwich sandwich){
-        Log.v("DetailsActivity", sandwich.getMainName());
-
-        Iterator i = sandwich.getAlsoKnownAs().iterator();
-        while(i.hasNext()){
-            Log.v("DetailsActivity", i.next().toString());
-        }
-
-        Log.v("DetailsActivity", sandwich.getPlaceOfOrigin());
-
-        Log.v("DetailsActivity", sandwich.getDescription());
-
-        Log.v("DetailsActivity", sandwich.getImage());
-
-        i = sandwich.getIngredients().iterator();
-        while(i.hasNext()){
-            Log.v("DetailsActivity", i.next().toString());
-        }
-
     }
 }

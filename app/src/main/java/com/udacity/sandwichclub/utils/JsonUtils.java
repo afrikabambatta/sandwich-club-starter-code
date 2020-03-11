@@ -12,7 +12,6 @@ public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
 
-        // TODO: Is this the correct place to declare identifiers?
         /* All names are children of the "name" object. */
         final String NAME = "name";
 
@@ -69,7 +68,7 @@ public class JsonUtils {
                 ingredientsList.add(ingredientsArray.getString(i));
             }
             sandwich.setIngredients(ingredientsList);
-        } catch (JSONException e){ // TODO: Investigate if this is the correct exception
+        } catch (JSONException e){ //
             e.printStackTrace();
         }
         return sandwich;

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.udacity.sandwichclub.DetailActivity">
-    <!--TODO: Format the layout of this detail view -->
+
     <ImageView
         android:id="@+id/image_iv"
         android:layout_width="match_parent"
